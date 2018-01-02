@@ -37,5 +37,6 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     // $ at the end indicates observable
     this.pizzas$ = this.store.select(fromStore.getAllPizzas);
+    this.store.dispatch(new fromStore.LoadPizzas());
   }
 }

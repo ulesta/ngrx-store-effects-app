@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 // store
-import { reducers } from './store';
+import { reducers, effects } from './store';
 
 // components
 import * as fromComponents from './components';
@@ -16,6 +18,7 @@ import * as fromContainers from './containers';
 
 // services
 import * as fromServices from './services';
+import { Effect } from '@ngrx/effects/src/effects_metadata';
 
 // routes
 export const ROUTES: Routes = [
@@ -40,7 +43,8 @@ export const ROUTES: Routes = [
     HttpClientModule,
     RouterModule.forChild(ROUTES),
     // Lazy-loads products state when this faeture gets initialized
-    StoreModule.forFeature('products', reducers)
+    StoreModule.forFeature('products', reducers),
+    EffectsModule.forFeature(effects)
   ],
   providers: [...fromServices.services],
   declarations: [...fromContainers.containers, ...fromComponents.components],
